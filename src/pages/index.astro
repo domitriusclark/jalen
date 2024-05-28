@@ -3,6 +3,33 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+function generateResponsiveMasonryGridDivs(
+  numDivs: number,
+  containerWidth: number
+): { height: number; width: number }[] {
+  const divs = [];
+  const columnCount = Math.floor(containerWidth / 200); // Assuming each div is 200px wide
+  const columnWidth = containerWidth / columnCount;
+  const heights = Array.from({ length: columnCount }, () => 0);
+
+  for (let i = 0; i < numDivs; i++) {
+    const shortestColumnIndex = heights.indexOf(Math.min(...heights));
+    const height = Math.floor(Math.random() * 200) + 100; // Random height between 100 and 300
+    const width = columnWidth - 20; // Adjust width for margin
+
+    divs.push({ height, width });
+
+    heights[shortestColumnIndex] += height + 20; // Adjust height for margin
+  }
+
+  return divs;
+}
+
+// Example usage
+const numDivs = 10;
+const containerWidth = 800; // Width of the container in pixels
+const divs = generateResponsiveMasonryGridDivs(numDivs, containerWidth);
 ---
 
 <!doctype html>
@@ -12,9 +39,101 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   </head>
   <body>
     <Header />
-    <main>
-      <h1>Phvntm Photography 📸</h1>
+    <main class="flex flex-col h-screen w-full items-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mx-6 my-6">
+        <div class="grid gap-4">
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="h-auto max-w-full rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
     </main>
-    <Footer />
   </body>
 </html>
